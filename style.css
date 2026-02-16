@@ -1,1 +1,157 @@
-/* Add styles here */
+:root {
+    --bg-color-dark: #121212;
+    --text-color-dark: #E0E0E0;
+    --card-bg-color-dark: #1E1E1E;
+    --btn-grad-start-dark: #6A11CB;
+    --btn-grad-end-dark: #2575FC;
+
+    --bg-color-light: #F0F2F5;
+    --text-color-light: #333333;
+    --card-bg-color-light: #FFFFFF;
+    --btn-grad-start-light: #FF8A00;
+    --btn-grad-end-light: #DC281E;
+
+    --yellow: #facc15;
+    --blue: #3b82f6;
+    --red: #ef4444;
+    --gray: #9ca3af;
+    --green: #22c55e;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 2rem;
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark {
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
+}
+
+body:not(.dark) {
+    background-color: var(--bg-color-light);
+    color: var(--text-color-light);
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+header p {
+    font-size: 1.2rem;
+    color: var(--gray);
+    margin-top: 0.5rem;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    color: white;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.btn-generate {
+    background-image: linear-gradient(to right, var(--btn-grad-start-dark), var(--btn-grad-end-dark));
+}
+
+body:not(.dark) .btn-generate {
+     background-image: linear-gradient(to right, var(--btn-grad-start-light), var(--btn-grad-end-light));
+}
+
+.btn-toggle-theme {
+    background-color: var(--card-bg-color-dark);
+    color: var(--text-color-dark);
+    border: 1px solid var(--gray);
+}
+
+body:not(.dark) .btn-toggle-theme {
+    background-color: var(--card-bg-color-light);
+    color: var(--text-color-light);
+}
+
+.lotto-games {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.game-card {
+    background-color: var(--card-bg-color-dark);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: background-color 0.3s;
+}
+
+body:not(.dark) .game-card {
+    background-color: var(--card-bg-color-light);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.game-header {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.lotto-numbers {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.lotto-ball {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    color: #111;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.lotto-ball:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+footer {
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 0.9rem;
+    color: var(--gray);
+}
