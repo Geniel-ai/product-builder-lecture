@@ -101,53 +101,103 @@ body:not(.dark) .btn-toggle-theme {
     color: var(--text-color-light);
 }
 
-.lotto-games {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
+.food-display {
+    text-align: center;
+    margin-top: 2rem;
 }
 
-.game-card {
+#result {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    min-height: 2.2rem;
+}
+
+#image-container {
+    margin-top: 1rem;
+}
+
+#food-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Contact Form Styles */
+.contact-form-section {
     background-color: var(--card-bg-color-dark);
     border-radius: 12px;
-    padding: 1.5rem;
+    padding: 2rem;
+    margin-top: 3rem;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: background-color 0.3s;
 }
 
-body:not(.dark) .game-card {
+body:not(.dark) .contact-form-section {
     background-color: var(--card-bg-color-light);
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
-.game-header {
-    font-size: 1.2rem;
+.contact-form-section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: var(--text-color-dark);
+}
+
+body:not(.dark) .contact-form-section h2 {
+    color: var(--text-color-light);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
     font-weight: 600;
-    margin-bottom: 1rem;
 }
 
-.lotto-numbers {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid var(--gray);
+    border-radius: 6px;
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
+    font-size: 1rem;
+    transition: border-color 0.3s, background-color 0.3s;
 }
 
-.lotto-ball {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 700;
-    color: #111;
-    transition: transform 0.2s, box-shadow 0.2s;
+body:not(.dark) .form-group input[type="text"],
+body:not(.dark) .form-group input[type="email"],
+body:not(.dark) .form-group textarea {
+    background-color: var(--card-bg-color-light);
+    color: var(--text-color-light);
+    border: 1px solid #ddd;
 }
 
-.lotto-ball:hover {
-    transform: scale(1.1);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group textarea:focus {
+    border-color: var(--btn-grad-end-dark);
+    outline: none;
 }
+
+.btn-submit {
+    width: 100%;
+    background-image: linear-gradient(to right, var(--btn-grad-start-dark), var(--btn-grad-end-dark));
+    margin-top: 1rem;
+}
+
+body:not(.dark) .btn-submit {
+    background-image: linear-gradient(to right, var(--btn-grad-start-light), var(--btn-grad-end-light));
+}
+
 
 footer {
     text-align: center;

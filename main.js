@@ -1,75 +1,37 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const generateBtn = document.getElementById('generate-btn');
+    const drawBtn = document.getElementById('draw-btn');
     const themeToggleBtn = document.getElementById('theme-toggle-btn');
-    const lottoGamesContainer = document.getElementById('lotto-games-container');
+    const resultDiv = document.getElementById('result');
+    const imageContainer = document.getElementById('image-container');
+    const foodImage = document.getElementById('food-image'); // Get reference to the image element
     const body = document.body;
 
-    // 가중치 배열 (1~45번 공)
-    const frequencyWeight = [
-        // 이 배열은 1부터 45까지 각 숫자의 가중치를 나타냅니다.
-        // 예시: 1이 2보다 2배 더 많이 나오게 하려면 [..., 2, 1, ...]
-        // 일단은 모든 숫자가 동일한 확률을 갖도록 1로 초기화합니다.
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 1, 1
-    ];
+    const foodItems = ['피자', '치킨', '햄버거', '초밥', '파스타', '김치찌개', '된장찌개', '제육볶음'];
+    
+    // Mapping of food items to image paths/URLs
+    const foodImages = {
+        '피자': 'keram-pizza-346985_1280.jpg',
+        '치킨': 'https://via.placeholder.com/400x300?text=Chicken', // Placeholder - replace with actual image path
+        '햄버거': 'https://via.placeholder.com/400x300?text=Hamburger', // Placeholder - replace with actual image path
+        '초밥': 'https://via.placeholder.com/400x300?text=Sushi',   // Placeholder - replace with actual image path
+        '파스타': 'https://via.placeholder.com/400x300?text=Pasta',   // Placeholder - replace with actual image path
+        '김치찌개': 'https://via.placeholder.com/400x300?text=Kimchi+Stew', // Placeholder - replace with actual image path
+        '된장찌개': 'https://via.placeholder.com/400x300?text=Soybean+Paste+Stew', // Placeholder - replace with actual image path
+        '제육볶음': 'https://via.placeholder.com/400x300?text=Jeyuk+Bokkeum' // Placeholder - replace with actual image path
+    };
 
-    function weightedRandom() {
-        const totalWeight = frequencyWeight.reduce((acc, weight) => acc + weight, 0);
-        let random = Math.random() * totalWeight;
+    function drawFood() {
+        const randomIndex = Math.floor(Math.random() * foodItems.length);
+        const selectedFood = foodItems[randomIndex];
+        const selectedImage = foodImages[selectedFood];
 
-        for (let i = 0; i < frequencyWeight.length; i++) {
-            if (random < frequencyWeight[i]) {
-                return i + 1;
-            }
-            random -= frequencyWeight[i];
-        }
-        return frequencyWeight.length;
-    }
-
-    function generateLottoGame() {
-        const game = new Set();
-        while (game.size < 6) {
-            game.add(weightedRandom());
-        }
-        return Array.from(game).sort((a, b) => a - b);
-    }
-
-    function getBallColor(number) {
-        if (number <= 10) return 'var(--yellow)';
-        if (number <= 20) return 'var(--blue)';
-        if (number <= 30) return 'var(--red)';
-        if (number <= 40) return 'var(--gray)';
-        return 'var(--green)';
-    }
-
-    function displayGames() {
-        lottoGamesContainer.innerHTML = '';
-        for (let i = 0; i < 5; i++) {
-            const game = generateLottoGame();
-            const gameCard = document.createElement('div');
-            gameCard.className = 'game-card';
-            
-            const gameHeader = document.createElement('div');
-            gameHeader.className = 'game-header';
-            gameHeader.textContent = `Game ${i + 1}`;
-            gameCard.appendChild(gameHeader);
-            
-            const numbersContainer = document.createElement('div');
-            numbersContainer.className = 'lotto-numbers';
-
-            game.forEach(number => {
-                const ball = document.createElement('div');
-                ball.className = 'lotto-ball';
-                ball.textContent = number;
-                ball.style.backgroundColor = getBallColor(number);
-                numbersContainer.appendChild(ball);
-            });
-
-            gameCard.appendChild(numbersContainer);
-            lottoGamesContainer.appendChild(gameCard);
+        resultDiv.textContent = `오늘의 메뉴는... ${selectedFood}!`;
+        
+        if (selectedImage) {
+            foodImage.src = selectedImage;
+            imageContainer.style.display = 'block';
+        } else {
+            imageContainer.style.display = 'none';
         }
     }
 
@@ -79,9 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
         themeToggleBtn.textContent = isDarkMode ? 'White Mode' : 'Dark Mode';
     }
 
-    generateBtn.addEventListener('click', displayGames);
+    drawBtn.addEventListener('click', drawFood);
     themeToggleBtn.addEventListener('click', toggleTheme);
 
-    // 초기 5개 게임 생성
-    displayGames();
+    // 초기 추첨
+    drawFood();
 });
