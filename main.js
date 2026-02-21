@@ -11,13 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mapping of food items to image paths/URLs
     const foodImages = {
         '피자': 'keram-pizza-346985_1280.jpg',
-        '치킨': 'https://via.placeholder.com/400x300?text=Chicken', // Placeholder - replace with actual image path
-        '햄버거': 'https://via.placeholder.com/400x300?text=Hamburger', // Placeholder - replace with actual image path
-        '초밥': 'https://via.placeholder.com/400x300?text=Sushi',   // Placeholder - replace with actual image path
-        '파스타': 'https://via.placeholder.com/400x300?text=Pasta',   // Placeholder - replace with actual image path
-        '김치찌개': 'https://via.placeholder.com/400x300?text=Kimchi+Stew', // Placeholder - replace with actual image path
-        '된장찌개': 'https://via.placeholder.com/400x300?text=Soybean+Paste+Stew', // Placeholder - replace with actual image path
-        '제육볶음': 'https://via.placeholder.com/400x300?text=Jeyuk+Bokkeum' // Placeholder - replace with actual image path
+        '치킨': 'https://static.photos/food/chicken',
+        '햄버거': 'https://static.photos/food/hamburger',
+        '초밥': 'https://static.photos/food/sushi',
+        '파스타': 'https://static.photos/food/pasta',
+        '김치찌개': 'https://static.photos/food/kimchi',
+        '된장찌개': 'https://static.photos/food/stew',
+        '제육볶음': 'https://static.photos/food/stir-fried-pork'
     };
 
     function drawFood() {
