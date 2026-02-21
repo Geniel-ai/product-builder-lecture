@@ -11,14 +11,24 @@ body {
     box-sizing: border-box;
 }
 
+body.dark {
+    background-color: #121212;
+    color: #E0E0E0;
+}
+
 .container {
-    max-width: 600px;
-    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
     background-color: #fff;
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
+    position: relative;
+}
+
+body.dark .container {
+    background-color: #1E1E1E;
 }
 
 h1 {
@@ -26,64 +36,161 @@ h1 {
     margin-bottom: 1rem;
 }
 
-p#instructions {
+body.dark h1 {
+    color: #E0E0E0;
+}
+
+header p {
+    font-size: 1.2rem;
     color: #7f8c8d;
+    margin-top: 0.5rem;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    color: white;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.btn-generate {
+    background-image: linear-gradient(to right, #6A11CB, #2575FC);
+}
+
+.btn-toggle-theme {
+    background-color: #f0f2f5;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+body.dark .btn-toggle-theme {
+    background-color: #1E1E1E;
+    color: #E0E0E0;
+    border: 1px solid #555;
+}
+
+.food-display {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+#result {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    min-height: 2.2rem;
+}
+
+#image-container {
+    margin-top: 1rem;
+}
+
+#food-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.contact-form-section {
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 3rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+body.dark .contact-form-section {
+    background-color: #2c2c2c;
+}
+
+.contact-form-section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: #333;
+}
+
+body.dark .contact-form-section h2 {
+    color: #E0E0E0;
+}
+
+.form-group {
     margin-bottom: 1.5rem;
 }
 
-.teachable-machine-container {
-    margin-top: 2rem;
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
 }
 
-#start-button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 0.8rem 1.5rem;
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #333;
     font-size: 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-bottom: 1rem;
+    transition: border-color 0.3s, background-color 0.3s;
 }
 
-#start-button:hover:not(:disabled) {
-    background-color: #218838;
+body.dark .form-group input[type="text"],
+body.dark .form-group input[type="email"],
+body.dark .form-group textarea {
+    background-color: #2c2c2c;
+    color: #E0E0E0;
+    border: 1px solid #555;
 }
 
-#start-button:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group textarea:focus {
+    border-color: #2575FC;
+    outline: none;
 }
 
-#webcam-container {
-    margin-top: 1.5rem;
-    display: flex;
-    justify-content: center;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: 1rem;
-}
-
-#label-container {
+.btn-submit {
+    width: 100%;
+    background-image: linear-gradient(to right, #6A11CB, #2575FC);
     margin-top: 1rem;
+}
+
+footer {
+    text-align: center;
+    margin-top: 3rem;
     font-size: 0.9rem;
-    color: #555;
+    color: #7f8c8d;
 }
 
-#result-display {
-    margin-top: 2rem;
-    font-size: 1.8rem;
+.top-right-nav {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.top-right-nav a {
+    text-decoration: none;
+    color: #3498db;
     font-weight: bold;
-    color: #34495e;
-    min-height: 2.5rem; /* To prevent layout shift */
-}
-
-.dog-type {
-    color: #3498db; /* Blue for dog */
-}
-
-.cat-type {
-    color: #e74c3c; /* Red for cat */
 }

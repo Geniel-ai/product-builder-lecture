@@ -1,0 +1,90 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 2rem;
+    background-color: #f0f2f5;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 600px;
+    width: 100%;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+p#instructions {
+    color: #7f8c8d;
+    margin-bottom: 1.5rem;
+}
+
+.teachable-machine-container {
+    margin-top: 2rem;
+}
+
+#image-upload {
+    margin-bottom: 1rem;
+}
+
+#image-container {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    min-height: 200px;
+}
+
+#image-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+#label-container {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+#result-display {
+    margin-top: 2rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #34495e;
+    min-height: 2.5rem; /* To prevent layout shift */
+}
+
+.dog-type {
+    color: #3498db; /* Blue for dog */
+}
+
+.cat-type {
+    color: #e74c3c; /* Red for cat */
+}
+
+.top-right-nav {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.top-right-nav a {
+    text-decoration: none;
+    color: #3498db;
+    font-weight: bold;
+}

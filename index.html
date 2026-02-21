@@ -3,95 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>동물상 테스트</title>
+    <title>오늘 뭐 먹지?</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="container">
-        <h1>나의 동물상은?</h1>
-        <p id="instructions">아래 시작 버튼을 누르고 카메라를 응시해주세요.</p>
+<body class="dark">
 
-        <div class="teachable-machine-container">
-            <div>Teachable Machine Image Model</div>
-            <button type="button" onclick="init()" id="start-button">Start</button>
-            <div id="webcam-container"></div>
-            <div id="label-container"></div>
-            <div id="result-display">카메라를 켜면 동물상을 분석합니다.</div>
+    <div class="container">
+        <header>
+            <h1>오늘 뭐 먹지?</h1>
+            <p>점심 메뉴 추첨기</p>
+            <nav class="top-right-nav">
+                <a href="animal-test.html">동물상 테스트 하러가기</a>
+            </nav>
+        </header>
+
+        <div class="controls">
+            <button class="btn btn-generate" id="draw-btn">추첨</button>
+            <button class="btn btn-toggle-theme" id="theme-toggle-btn">White Mode</button>
         </div>
+
+        <main class="food-display" id="food-display-container">
+            <!-- Selected food will be displayed here -->
+            <div id="result"></div>
+            <div id="image-container" style="display: none;">
+                <img id="food-image" src="keram-pizza-346985_1280.jpg" alt="피자">
+            </div>
+        </main>
+
+        <section class="contact-form-section">
+            <h2>제휴 문의</h2>
+            <form action="https://formspree.io/f/meelkwzb" method="POST" class="contact-form">
+                <div class="form-group">
+                    <label for="name">이름:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">이메일:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">메시지:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-submit">문의하기</button>
+            </form>
+        </section>
+
+        <footer>
+            <p>본 서비스는 단지 재미를 위한 것입니다.</p>
+        </footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-    <script src="https://cdn.jsdelivr.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
-    <script type="text/javascript">
-        const URL = "https://teachablemachine.withgoogle.com/models/To6Q_p8IW/";
-
-        let model, webcam, labelContainer, maxPredictions;
-        let startButton;
-        let instructions;
-        let resultDisplay;
-
-        async function init() {
-            startButton = document.getElementById("start-button");
-            instructions = document.getElementById("instructions");
-            resultDisplay = document.getElementById("result-display");
-
-            startButton.disabled = true;
-            instructions.style.display = 'none';
-            resultDisplay.textContent = "분석 중...";
-            labelContainer = document.getElementById("label-container");
-            labelContainer.style.display = 'none'; // Hide raw predictions
-
-            const modelURL = URL + "model.json";
-            const metadataURL = URL + "metadata.json";
-
-            model = await tmImage.load(modelURL, metadataURL);
-            maxPredictions = model.getTotalClasses();
-
-            const flip = true;
-            webcam = new tmImage.Webcam(200, 200, flip);
-            await webcam.setup();
-            await webcam.play();
-            window.requestAnimationFrame(loop);
-
-            document.getElementById("webcam-container").appendChild(webcam.canvas);
-            
-            for (let i = 0; i < maxPredictions; i++) {
-                labelContainer.appendChild(document.createElement("div"));
-            }
-        }
-
-        async function loop() {
-            webcam.update();
-            await predict();
-            window.requestAnimationFrame(loop);
-        }
-
-        async function predict() {
-            const prediction = await model.predict(webcam.canvas);
-            let highestProbability = 0;
-            let predictedClass = "";
-
-            for (let i = 0; i < maxPredictions; i++) {
-                if (prediction[i].probability > highestProbability) {
-                    highestProbability = prediction[i].probability;
-                    predictedClass = prediction[i].className;
-                }
-            }
-
-            if (predictedClass === "강아지") {
-                resultDisplay.innerHTML = "당신은 <span class='dog-type'>강아지상</span>입니다!";
-            } else if (predictedClass === "고양이") {
-                resultDisplay.innerHTML = "당신은 <span class='cat-type'>고양이상</span>입니다!";
-            } else {
-                resultDisplay.innerHTML = "분석 중...";
-            }
-            // Optional: display raw predictions for debugging
-            // for (let i = 0; i < maxPredictions; i++) {
-            //     const classPrediction =
-            //         prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-            //     labelContainer.childNodes[i].innerHTML = classPrediction;
-            // }
-        }
+    <div id="disqus_thread"></div>
+    <script>
+        /**
+        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+        /*
+        var disqus_config = function () {
+        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+        */
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://week1-lotto.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
     </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    <script src="main.js"></script>
+
 </body>
 </html>
