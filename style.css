@@ -289,6 +289,26 @@ footer {
     padding: var(--spacing-md) 0;
     font-size: 0.85rem;
     color: var(--text-color-subtle);
+    border-top: 1px solid var(--border-color-light);
+}
+
+body.dark footer {
+    border-top-color: var(--border-color-dark);
+}
+
+.footer-nav {
+    margin: var(--spacing-sm) 0;
+}
+
+.footer-nav a {
+    color: var(--text-color-subtle);
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 0.85rem;
+}
+
+.footer-nav a:hover {
+    color: var(--primary-color);
 }
 
 .disclaimer { font-size: 0.75rem; margin-top: 5px; }
@@ -299,7 +319,7 @@ footer {
     right: var(--spacing-sm);
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
 }
 
 .top-right-nav a {
@@ -307,6 +327,70 @@ footer {
     text-decoration: none;
     font-weight: 700;
     font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.top-right-nav a:hover {
+    color: var(--primary-color);
+}
+
+/* Content Pages (About, Privacy) */
+.content-page {
+    text-align: left;
+    padding: var(--spacing-md) 0;
+    line-height: 1.8;
+}
+
+.content-page h2 {
+    margin-bottom: var(--spacing-md);
+    color: var(--primary-dark);
+    border-bottom: 2px solid var(--primary-color);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+body.dark .content-page h2 {
+    color: var(--primary-light);
+}
+
+.content-page h3 {
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-xs);
+    color: var(--accent-color);
+}
+
+.info-section {
+    background: rgba(0, 0, 0, 0.03);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    margin-top: var(--spacing-md);
+}
+
+body.dark .info-section {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* How it works section on Main */
+.how-it-works-section {
+    margin: var(--spacing-lg) 0;
+    padding: var(--spacing-md);
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.05), rgba(33, 150, 243, 0.05));
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color-light);
+    text-align: left;
+}
+
+body.dark .how-it-works-section {
+    border-color: var(--border-color-dark);
+}
+
+.how-it-works-section h3 {
+    margin-bottom: var(--spacing-xs);
+    color: var(--primary-dark);
+}
+
+body.dark .how-it-works-section h3 {
+    color: var(--primary-light);
 }
 
 .btn-toggle-theme {
