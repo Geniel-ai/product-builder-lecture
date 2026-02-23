@@ -3,73 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>오늘 뭐 먹지?</title>
+    <title>대박 로또 - AI 행운 번호 추첨기</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="dark">
 
     <div class="container">
         <header>
-            <h1>오늘 뭐 먹지?</h1>
-            <p>점심 메뉴 추첨기</p>
+            <div class="logo-area">
+                <span class="badge">hoze</span>
+                <h1>호재 로또</h1>
+            </div>
+            <p>AI 기반 알고리즘으로 분석하는 오늘의 필승 번호</p>
             <nav class="top-right-nav">
-                <a href="animal-test.html">동물상 테스트 하러가기</a>
+                <a href="animal-test.html">✨ 동물상 테스트 하러가기</a>
+                <button class="btn-toggle-theme" id="theme-toggle-btn">🌓</button>
             </nav>
         </header>
 
-        <div class="controls">
-            <button class="btn btn-generate" id="draw-btn">추첨</button>
-            <button class="btn btn-toggle-theme" id="theme-toggle-btn">White Mode</button>
+        <div class="ad-placeholder top-ad">
+            <p>광고 문의: enjoynow@kakao.com</p>
         </div>
 
-        <main class="food-display" id="food-display-container">
-            <!-- Selected food will be displayed here -->
-            <div id="result"></div>
-            <div id="image-container" style="display: none;">
-                <img id="food-image" src="keram-pizza-346985_1280.jpg" alt="피자">
+        <div class="controls">
+            <button class="btn btn-generate" id="draw-btn">무료 번호 생성</button>
+            <button class="btn btn-premium" id="premium-btn">💎 AI 프리미엄 분석 (추천)</button>
+        </div>
+
+        <main class="lotto-display">
+            <div id="loading-spinner" style="display: none;">
+                <div class="spinner"></div>
+                <p>AI가 역대 당첨 데이터를 분석 중입니다...</p>
             </div>
+            <div id="result" class="ball-container">
+                <!-- Lotto balls will be displayed here -->
+            </div>
+            <div id="lucky-message" class="sub-message"></div>
         </main>
 
+        <section class="premium-feature-section">
+            <h3>🚀 프리미엄 회원을 위한 혜택</h3>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h4>패턴 분석</h4>
+                    <p>홀짝 비율 및 총합 통계를 적용한 필터링</p>
+                </div>
+                <div class="feature-item">
+                    <h4>제외수 설정</h4>
+                    <p>최근 5주간 미출현 번호를 제외한 최적 조합</p>
+                </div>
+                <div class="feature-item">
+                    <h4>운세 연동</h4>
+                    <p>오늘의 생년월일 운세를 반영한 맞춤 번호</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="ad-placeholder middle-ad">
+            <p>스폰서 광고: 당신의 행운을 잡으세요!</p>
+        </div>
+
         <section class="contact-form-section">
-            <h2>제휴 문의</h2>
+            <h2>🤝 비즈니스 및 제휴 문의</h2>
+            <p class="section-desc">광고 게재 및 API 연동 문의는 아래 폼을 이용해 주세요.</p>
             <form action="https://formspree.io/f/meelkwzb" method="POST" class="contact-form">
                 <div class="form-group">
-                    <label for="name">이름:</label>
-                    <input type="text" id="name" name="name" required>
+                    <label for="name">성함/업체명:</label>
+                    <input type="text" id="name" name="name" placeholder="홍길동" required>
                 </div>
                 <div class="form-group">
-                    <label for="email">이메일:</label>
-                    <input type="email" id="email" name="email" required>
+                    <label for="email">이메일 주소:</label>
+                    <input type="email" id="email" name="email" placeholder="example@email.com" required>
                 </div>
                 <div class="form-group">
-                    <label for="message">메시지:</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
+                    <label for="message">문의 내용:</label>
+                    <textarea id="message" name="message" rows="5" placeholder="제휴 제안 내용을 적어주세요." required></textarea>
                 </div>
-                <button type="submit" class="btn btn-submit">문의하기</button>
+                <button type="submit" class="btn btn-submit">제휴 신청하기</button>
             </form>
         </section>
 
+        <section class="comment-section">
+            <h2>💬 실시간 당첨 후기</h2>
+            <div id="disqus_thread"></div>
+        </section>
+
         <footer>
-            <p>본 서비스는 단지 재미를 위한 것입니다.</p>
+            <p>© 2026 대박 로또. All rights reserved.</p>
+            <p class="disclaimer">본 서비스에서 제공하는 번호는 통계적 분석에 기반하며, 당첨을 보장하지 않습니다.</p>
         </footer>
     </div>
 
-    <div id="disqus_thread"></div>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        /*
         var disqus_config = function () {
-        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            this.page.url = window.location.href;  
+            this.page.identifier = 'lotto-main-page'; 
         };
-        */
-        (function() { // DON'T EDIT BELOW THIS LINE
-        var d = document, s = d.createElement('script');
-        s.src = 'https://week1-lotto.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
+        (function() { 
+            var d = document, s = d.createElement('script');
+            s.src = 'https://week1-lotto.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
         })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
