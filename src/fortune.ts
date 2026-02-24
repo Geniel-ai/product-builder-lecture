@@ -1,6 +1,8 @@
 import { recommendLottoNumbers } from './LottoRecommender';
 import { KOREAN_CITIES, WORLD_CITIES, formatCityName } from './orrery/cities';
 
+console.log('Fortune script loading...');
+
 const allCities = [...KOREAN_CITIES, ...WORLD_CITIES];
 
 const fortuneBtn = document.getElementById('fortune-btn') as HTMLButtonElement;
@@ -39,6 +41,7 @@ function getBallColorClass(num: number) {
 }
 
 function displayNumbers(numbers: number[]) {
+    if (!resultDiv) return;
     resultDiv.innerHTML = '';
     numbers.forEach((num, index) => {
         setTimeout(() => {
@@ -52,6 +55,7 @@ function displayNumbers(numbers: number[]) {
 }
 
 async function handleFortuneDraw() {
+    console.log('Fortune draw clicked');
     if (!birthDateInput.value) {
         alert('생년월일을 입력해주세요!');
         return;
@@ -85,7 +89,6 @@ async function handleFortuneDraw() {
             fortuneResultArea.style.display = 'block';
             displayNumbers(recommendation.numbers);
             
-            // 줄바꿈 보존을 위한 안전한 방식
             const basisHtml = recommendation.basis.split('\n').join('<br>');
             fortuneText.innerHTML = '<strong>✨ 오늘의 기운 분석</strong><br><br>' + basisHtml;
             
@@ -94,7 +97,7 @@ async function handleFortuneDraw() {
     } catch (error) {
         console.error('Error during lotto generation:', error);
         loadingSpinner.style.display = 'none';
-        alert('번호 생성 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+        alert('번호 생성 중 오류가 발생했습니다.');
         fortuneBtn.disabled = false;
     }
 }
@@ -102,8 +105,16 @@ async function handleFortuneDraw() {
 function toggleTheme() {
     body.classList.toggle('dark');
     const isDarkMode = body.classList.contains('dark');
+    if (themeToggleBtn) {
+        themeToggleBtn.textContent = isDarkMode ? '🌓' : '☀️';
+    }
+}
+
+if (fortuneBtn) fortuneBtn.onclick = handleFortuneDraw;
+if (themeToggleBtn) {
+    themeToggleBtn.onclick = toggleTheme;
+    const isDarkMode = body.classList.contains('dark');
     themeToggleBtn.textContent = isDarkMode ? '🌓' : '☀️';
 }
 
-if (fortuneBtn) fortuneBtn.addEventListener('click', handleFortuneDraw);
-if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
+console.log('Fortune script initialized');
