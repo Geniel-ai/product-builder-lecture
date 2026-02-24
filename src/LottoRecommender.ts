@@ -9,17 +9,22 @@ export interface LottoRecommendation {
 }
 
 export async function recommendLottoNumbers(input: BirthInput): Promise<LottoRecommendation> {
-    const saju = calculateSaju(input);
-    const natal = await calculateNatal(input);
+    // Provide default values for time to prevent errors in Orrery engine
+    const hour = input.hour ?? 12;
+    const minute = input.minute ?? 0;
+    const birthInputWithTime: BirthInput = { ...input, hour, minute };
+
+    const saju = calculateSaju(birthInputWithTime);
+    const natal = await calculateNatal(birthInputWithTime);
     
     // createChart(year, month, day, hour, minute, isMale)
     const ziwei = createChart(
-        input.year, 
-        input.month, 
-        input.day, 
-        input.hour, 
-        input.minute, 
-        input.gender === 'M'
+        birthInputWithTime.year, 
+        birthInputWithTime.month, 
+        birthInputWithTime.day, 
+        birthInputWithTime.hour, 
+        birthInputWithTime.minute, 
+        birthInputWithTime.gender === 'M'
     );
 
     const pool: number[] = [];
