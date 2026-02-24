@@ -382,14 +382,14 @@ body.dark footer {
     right: var(--spacing-sm);
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
 }
 
 .top-right-nav a {
     color: var(--secondary-color);
     text-decoration: none;
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     transition: color 0.3s;
 }
 
@@ -478,6 +478,25 @@ body.dark .btn-toggle-theme:hover {
 }
 
 @media (max-width: 600px) {
+    header {
+        padding-top: var(--spacing-md);
+        margin-bottom: var(--spacing-xl);
+    }
+
+    .top-right-nav {
+        position: relative;
+        top: 0;
+        right: 0;
+        justify-content: center;
+        margin-top: var(--spacing-lg);
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .top-right-nav a {
+        font-size: 0.75rem;
+    }
+
     .feature-grid { grid-template-columns: 1fr; }
     .ball { width: 40px; height: 40px; font-size: 1rem; }
 }
