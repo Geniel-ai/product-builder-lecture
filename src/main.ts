@@ -6,14 +6,15 @@ const themeToggleBtn = document.getElementById('theme-toggle-btn') as HTMLButton
 const resultDiv = document.getElementById('result') as HTMLDivElement;
 const loadingSpinner = document.getElementById('loading-spinner') as HTMLDivElement;
 const luckyMessage = document.getElementById('lucky-message') as HTMLDivElement;
-const body = document.body;
+const body = document.body; // body is always available when module script executes at the end of body
 
 // Check elements
 console.log('Elements found:', {
     drawBtn: !!drawBtn,
     premiumBtn: !!premiumBtn,
     themeToggleBtn: !!themeToggleBtn,
-    resultDiv: !!resultDiv
+    resultDiv: !!resultDiv,
+    body: !!body // Log body status
 });
 
 function getLottoNumbers() {
@@ -34,7 +35,10 @@ function getBallColorClass(num: number) {
 }
 
 function displayNumbers(numbers: number[], message: string = '오늘의 행운 번호입니다.') {
-    if (!resultDiv || !luckyMessage) return;
+    if (!resultDiv || !luckyMessage) {
+        console.error('displayNumbers: resultDiv or luckyMessage not found!');
+        return;
+    }
     resultDiv.innerHTML = '';
     luckyMessage.textContent = message;
     
@@ -57,7 +61,10 @@ function handleDraw() {
 
 function handlePremiumDraw() {
     console.log('Premium draw clicked');
-    if (!drawBtn || !premiumBtn || !resultDiv || !luckyMessage || !loadingSpinner) return;
+    if (!drawBtn || !premiumBtn || !resultDiv || !luckyMessage || !loadingSpinner) {
+        console.error('handlePremiumDraw: essential elements not found!');
+        return;
+    }
     
     drawBtn.disabled = true;
     premiumBtn.disabled = true;
@@ -75,11 +82,16 @@ function handlePremiumDraw() {
 }
 
 function toggleTheme() {
+    if (!body) {
+        console.error('toggleTheme: document.body not found!');
+        return;
+    }
     body.classList.toggle('dark');
     const isDarkMode = body.classList.contains('dark');
     if (themeToggleBtn) {
         themeToggleBtn.textContent = isDarkMode ? '🌓' : '☀️';
     }
+    console.log('Theme toggled. isDarkMode:', isDarkMode);
 }
 
 // Event Listeners
@@ -88,8 +100,10 @@ if (premiumBtn) premiumBtn.onclick = handlePremiumDraw;
 if (themeToggleBtn) {
     themeToggleBtn.onclick = toggleTheme;
     // Initial sync
-    const isDarkMode = body.classList.contains('dark');
-    themeToggleBtn.textContent = isDarkMode ? '🌓' : '☀️';
+    if (body) { // Ensure body is available before initial sync
+        const isDarkMode = body.classList.contains('dark');
+        themeToggleBtn.textContent = isDarkMode ? '🌓' : '☀️';
+    }
 }
 
 console.log('Main script initialized');
