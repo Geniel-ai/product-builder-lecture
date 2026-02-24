@@ -1,5 +1,5 @@
 import { recommendLottoNumbers } from './LottoRecommender';
-import { KOREAN_CITIES } from './orrery/cities';
+import { KOREAN_CITIES, formatCityName } from './orrery/cities';
 
 document.addEventListener('DOMContentLoaded', () => {
     const drawBtn = document.getElementById('draw-btn') as HTMLButtonElement;
@@ -18,6 +18,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const birthTimeInput = document.getElementById('birth-time') as HTMLInputElement;
     const genderSelect = document.getElementById('gender') as HTMLSelectElement;
     const citySelect = document.getElementById('city-select') as HTMLSelectElement;
+
+    // Populate City Select
+    function populateCities() {
+        if (!citySelect) return;
+        citySelect.innerHTML = '';
+        KOREAN_CITIES.forEach((city, index) => {
+            const option = document.createElement('option');
+            option.value = index.toString();
+            option.textContent = formatCityName(city);
+            citySelect.appendChild(option);
+        });
+    }
+    populateCities();
 
     function getLottoNumbers() {
         const numbers: number[] = [];
@@ -86,8 +99,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const time = birthTimeInput.value || '12:00';
         const [hour, minute] = time.split(':').map(Number);
         const gender = genderSelect.value as 'M' | 'F';
-        const cityKey = citySelect.value;
-        const city = KOREAN_CITIES.find(c => c.name === cityKey) || KOREAN_CITIES[0];
+        const cityIndex = parseInt(citySelect.value);
+        const city = KOREAN_CITIES[cityIndex] || KOREAN_CITIES[0];
 
         drawBtn.disabled = true;
         premiumBtn.disabled = true;
@@ -135,10 +148,10 @@ document.addEventListener('DOMContentLoaded', () => {
         themeToggleBtn.textContent = isDarkMode ? '🌓' : '☀️';
     }
 
-    drawBtn.addEventListener('click', handleDraw);
-    premiumBtn.addEventListener('click', handlePremiumDraw);
-    fortuneBtn.addEventListener('click', () => {
+    if (drawBtn) drawBtn.addEventListener('click', handleDraw);
+    if (premiumBtn) premiumBtn.addEventListener('click', handlePremiumDraw);
+    if (fortuneBtn) fortuneBtn.addEventListener('click', () => {
         handleFortuneDraw();
     });
-    themeToggleBtn.addEventListener('click', toggleTheme);
+    if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
 });
