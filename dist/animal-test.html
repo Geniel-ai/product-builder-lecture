@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동물상 테스트</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1890862001254414"
+     crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-1890862001254414">
+  <link rel="stylesheet" crossorigin href="./assets/animal-CDCp2qpW.css">
+</head>
+<body>
+    <div class="container">
+        <h1>나의 동물상은?</h1>
+        <p id="instructions">아래 파일 선택 버튼을 눌러 얼굴 사진을 업로드해주세요.</p>
+
+        <div class="teachable-machine-container">
+            <input type="file" id="image-upload" accept="image/*" onchange="handleImageUpload(event)">
+            <div id="image-container"></div>
+            <div id="label-container"></div>
+            <div id="result-display">사진을 업로드하면 동물상을 분석합니다.</div>
+        </div>
+        <nav class="top-right-nav">
+            <a href="index.html">로또 번호 추천 받으러 가기</a>
+        </nav>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    <script type="text/javascript">
+        const URL = "https://teachablemachine.withgoogle.com/models/To6Q_p8IW/";
+
+        let model, maxPredictions;
+        let resultDisplay, imageContainer, labelContainer;
+
+        async function init() {
+            const modelURL = URL + "model.json";
+            const metadataURL = URL + "metadata.json";
+
+            model = await tmImage.load(modelURL, metadataURL);
+            maxPredictions = model.getTotalClasses();
+
+            resultDisplay = document.getElementById("result-display");
+            imageContainer = document.getElementById("image-container");
+            labelContainer = document.getElementById("label-container");
+        }
+        init();
+
+        async function handleImageUpload(event) {
+            const image = event.target.files[0];
+            if (image) {
+                const reader = new FileReader();
+                reader.onload = async (e) => {
+                    const img = new Image();
+                    img.src = e.target.result;
+                    img.onload = async () => {
+                        imageContainer.innerHTML = '';
+                        imageContainer.appendChild(img);
+                        await predict(img);
+                    }
+                };
+                reader.readAsDataURL(image);
+            }
+        }
+
+        async function predict(imageElement) {
+            resultDisplay.textContent = "분석 중...";
+            const prediction = await model.predict(imageElement);
+            let highestProbability = 0;
+            let predictedClass = "";
+
+            for (let i = 0; i < maxPredictions; i++) {
+                if (prediction[i].probability > highestProbability) {
+                    highestProbability = prediction[i].probability;
+                    predictedClass = prediction[i].className;
+                }
+            }
+
+            if (predictedClass === "강아지") {
+                resultDisplay.innerHTML = "당신은 <span class='dog-type'>강아지상</span>입니다!";
+            } else if (predictedClass === "고양이") {
+                resultDisplay.innerHTML = "당신은 <span class='cat-type'>고양이상</span>입니다!";
+            } else {
+                resultDisplay.innerHTML = "얼굴을 찾을 수 없습니다.";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -7,8 +7,9 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1890862001254414"
      crossorigin="anonymous"></script>
     <meta name="google-adsense-account" content="ca-pub-1890862001254414">
-  <script type="module" crossorigin src="./assets/index-Dc3vK31O.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-DHuJUhOw.css">
+  <script type="module" crossorigin src="./assets/main-DToiWGj0.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/modulepreload-polyfill-B5Qt9EMX.js">
+  <link rel="stylesheet" crossorigin href="./assets/style-DHuJUhOw.css">
 </head>
 <body class="dark">
 
@@ -23,7 +24,8 @@
             <p>AI 기반 알고리즘으로 분석하는 오늘의 필승 번호</p>
             <nav class="top-right-nav">
                 <a href="about.html">서비스 소개</a>
-                <a href="animal-test.html">✨ 동물상 테스트 하러가기</a>
+                <a href="animal-test.html">✨ 동물상 테스트</a>
+                <a href="fortune.html" class="highlight-link">🔮 운세 기반 추천</a>
                 <button class="btn-toggle-theme" id="theme-toggle-btn">🌓</button>
             </nav>
         </header>
@@ -36,49 +38,6 @@
             <button class="btn btn-generate" id="draw-btn">무료 번호 생성</button>
             <button class="btn btn-premium" id="premium-btn">💎 AI 프리미엄 분석 (추천)</button>
         </div>
-
-        <section class="fortune-section" id="fortune-input-area">
-            <h3>🔮 사주·점성술 기반 맞춤 번호</h3>
-            <p class="section-desc">당신의 생년월일시 데이터를 분석하여 하늘의 기운이 담긴 번호를 추출합니다.</p>
-            <div class="fortune-form">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="birth-date">생년월일</label>
-                        <input type="date" id="birth-date" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="birth-time">태어난 시간</label>
-                        <input type="time" id="birth-time">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>성별</label>
-                        <select id="gender">
-                            <option value="M">남성</option>
-                            <option value="F">여성</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>태어난 지역</label>
-                        <select id="city-select">
-                            <option value="Seoul">서울</option>
-                            <option value="Busan">부산</option>
-                            <option value="Incheon">인천</option>
-                            <option value="Daegu">대구</option>
-                            <option value="Daejeon">대전</option>
-                            <option value="Gwangju">광주</option>
-                            <option value="Ulsan">울산</option>
-                        </select>
-                    </div>
-                </div>
-                <button class="btn btn-fortune" id="fortune-btn">✨ 운세 기반 번호 생성</button>
-            </div>
-            <div id="fortune-analysis" class="analysis-result">
-                <h4>🔮 분석 결과</h4>
-                <div id="fortune-text"></div>
-            </div>
-        </section>
 
         <main class="lotto-display">
             <div id="loading-spinner" style="display: none;">
