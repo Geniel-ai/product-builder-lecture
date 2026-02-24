@@ -159,6 +159,69 @@ body.dark .ad-placeholder {
     box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
 }
 
+.fortune-section {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(167, 119, 227, 0.3);
+}
+
+.fortune-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.form-row .form-group {
+    flex: 1;
+    min-width: 150px;
+}
+
+.fortune-form .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.fortune-form input, .fortune-form select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background: #222;
+    color: white;
+}
+
+.btn-fortune {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    margin-top: 10px;
+    color: white;
+}
+
+.analysis-result {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    display: none;
+    text-align: left;
+}
+
+.analysis-result h4 {
+    color: #f093fb;
+    margin-bottom: 10px;
+}
+
 .btn-toggle-theme {
     background-color: transparent;
     color: var(--text-color-subtle);

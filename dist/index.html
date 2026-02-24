@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대박 로또 - AI 행운 번호 추첨기</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1890862001254414"
+     crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-1890862001254414">
+  <script type="module" crossorigin src="./assets/index-nIngOB6D.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-DHuJUhOw.css">
+</head>
+<body class="dark">
+
+    <div class="container">
+        <header>
+            <div class="logo-area">
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <span class="badge">hoze</span>
+                    <h1>호재 로또</h1>
+                </a>
+            </div>
+            <p>AI 기반 알고리즘으로 분석하는 오늘의 필승 번호</p>
+            <nav class="top-right-nav">
+                <a href="about.html">서비스 소개</a>
+                <a href="animal-test.html">✨ 동물상 테스트 하러가기</a>
+                <button class="btn-toggle-theme" id="theme-toggle-btn">🌓</button>
+            </nav>
+        </header>
+
+        <div class="ad-placeholder top-ad">
+            <p>광고 문의: enjoynow@kakao.com</p>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-generate" id="draw-btn">무료 번호 생성</button>
+            <button class="btn btn-premium" id="premium-btn">💎 AI 프리미엄 분석 (추천)</button>
+        </div>
+
+        <section class="fortune-section" id="fortune-input-area">
+            <h3>🔮 사주·점성술 기반 맞춤 번호</h3>
+            <p class="section-desc">당신의 생년월일시 데이터를 분석하여 하늘의 기운이 담긴 번호를 추출합니다.</p>
+            <div class="fortune-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="birth-date">생년월일</label>
+                        <input type="date" id="birth-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="birth-time">태어난 시간</label>
+                        <input type="time" id="birth-time">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>성별</label>
+                        <select id="gender">
+                            <option value="M">남성</option>
+                            <option value="F">여성</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>태어난 지역</label>
+                        <select id="city-select">
+                            <option value="Seoul">서울</option>
+                            <option value="Busan">부산</option>
+                            <option value="Incheon">인천</option>
+                            <option value="Daegu">대구</option>
+                            <option value="Daejeon">대전</option>
+                            <option value="Gwangju">광주</option>
+                            <option value="Ulsan">울산</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn btn-fortune" id="fortune-btn">✨ 운세 기반 번호 생성</button>
+            </div>
+            <div id="fortune-analysis" class="analysis-result">
+                <h4>🔮 분석 결과</h4>
+                <div id="fortune-text"></div>
+            </div>
+        </section>
+
+        <main class="lotto-display">
+            <div id="loading-spinner" style="display: none;">
+                <div class="spinner"></div>
+                <p>AI가 역대 당첨 데이터를 분석 중입니다...</p>
+            </div>
+            <div id="result" class="ball-container">
+                <!-- Lotto balls will be displayed here -->
+            </div>
+            <div id="lucky-message" class="sub-message"></div>
+        </main>
+
+        <section class="how-it-works-section">
+            <h3>📊 분석 엔진 원리</h3>
+            <p>호재 로또의 AI 엔진은 최근 100회차 이상의 당첨 번호를 실시간으로 분석합니다. 각 번호의 출현 빈도(Hot/Cold), 번호 간의 상관관계(Co-occurrence), 그리고 수학적 분산 데이터를 조합하여 사용자에게 가장 가능성 높은 조합을 제시합니다.</p>
+        </section>
+
+        <section class="premium-feature-section">
+            <h3>🚀 프리미엄 회원을 위한 혜택</h3>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h4>패턴 분석</h4>
+                    <p>홀짝 비율 및 총합 통계를 적용한 필터링</p>
+                </div>
+                <div class="feature-item">
+                    <h4>제외수 설정</h4>
+                    <p>최근 5주간 미출현 번호를 제외한 최적 조합</p>
+                </div>
+                <div class="feature-item">
+                    <h4>운세 연동</h4>
+                    <p>오늘의 생년월일 운세를 반영한 맞춤 번호</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="ad-placeholder middle-ad">
+            <p>스폰서 광고: 당신의 행운을 잡으세요!</p>
+        </div>
+
+        <section class="contact-form-section">
+            <h2>🤝 비즈니스 및 제휴 문의</h2>
+            <p class="section-desc">광고 게재 및 API 연동 문의는 아래 폼을 이용해 주세요.</p>
+            <form action="https://formspree.io/f/meelkwzb" method="POST" class="contact-form">
+                <div class="form-group">
+                    <label for="name">성함/업체명:</label>
+                    <input type="text" id="name" name="name" placeholder="홍길동" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">이메일 주소:</label>
+                    <input type="email" id="email" name="email" placeholder="example@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">문의 내용:</label>
+                    <textarea id="message" name="message" rows="5" placeholder="제휴 제안 내용을 적어주세요." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-submit">제휴 신청하기</button>
+            </form>
+        </section>
+
+        <section class="comment-section">
+            <h2>💬 실시간 당첨 후기</h2>
+            <div id="disqus_thread"></div>
+        </section>
+
+        <footer>
+            <p>© 2026 호재 로또. All rights reserved.</p>
+            <nav class="footer-nav">
+                <a href="index.html">홈</a> | 
+                <a href="about.html">소개</a> | 
+                <a href="privacy.html">개인정보처리방침</a>
+            </nav>
+            <p class="disclaimer">본 서비스에서 제공하는 번호는 통계적 분석에 기반하며, 당첨을 보장하지 않습니다.</p>
+        </footer>
+    </div>
+
+    <script>
+        var disqus_config = function () {
+            this.page.url = window.location.href;  
+            this.page.identifier = 'lotto-main-page'; 
+        };
+        (function() { 
+            var d = document, s = d.createElement('script');
+            s.src = 'https://week1-lotto.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</body>
+</html>
