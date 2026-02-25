@@ -91,8 +91,12 @@ export async function recommendLottoNumbers(input: BirthInput): Promise<LottoRec
     const finalNumbers: number[] = [];
     const uniquePool = Array.from(new Set(pool));
     
-    // Simple pseudo-random based on input to make it consistent for the same person/day
-    const seed = input.year * 10000 + input.month * 100 + input.day + (input.hour || 0);
+    // Simple pseudo-random based on input and current date to make it consistent for the same person/day
+    const today = new Date();
+    const dateSeed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    const seed = birthInputWithTime.year * 10000 + birthInputWithTime.month * 100 + birthInputWithTime.day + 
+                 birthInputWithTime.hour + birthInputWithTime.minute + dateSeed;
+    
     let rng = seed;
     const nextRng = () => {
         rng = (rng * 16807) % 2147483647;

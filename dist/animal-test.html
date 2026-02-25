@@ -7,10 +7,18 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1890862001254414"
      crossorigin="anonymous"></script>
     <meta name="google-adsense-account" content="ca-pub-1890862001254414">
-  <link rel="stylesheet" crossorigin href="./assets/animal-CDCp2qpW.css">
+  <script type="module" crossorigin src="./assets/theme-DCiCAzh1.js"></script>
+  <script type="module" crossorigin src="./assets/simple-page-BCWXwl99.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/animal-CFLgxbMV.css">
 </head>
-<body>
+<body class="dark">
     <div class="container">
+        <header>
+            <nav class="top-right-nav">
+                <a href="index.html">홈으로</a>
+                <button class="btn-toggle-theme" id="theme-toggle-btn">🌓</button>
+            </nav>
+        </header>
         <h1>나의 동물상은?</h1>
         <p id="instructions">아래 파일 선택 버튼을 눌러 얼굴 사진을 업로드해주세요.</p>
 
@@ -20,9 +28,6 @@
             <div id="label-container"></div>
             <div id="result-display">사진을 업로드하면 동물상을 분석합니다.</div>
         </div>
-        <nav class="top-right-nav">
-            <a href="index.html">로또 번호 추천 받으러 가기</a>
-        </nav>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
@@ -76,12 +81,14 @@
                 }
             }
 
-            if (predictedClass === "강아지") {
-                resultDisplay.innerHTML = "당신은 <span class='dog-type'>강아지상</span>입니다!";
-            } else if (predictedClass === "고양이") {
-                resultDisplay.innerHTML = "당신은 <span class='cat-type'>고양이상</span>입니다!";
+            if (highestProbability > 0.5) {
+                let typeClass = "";
+                if (predictedClass === "강아지") typeClass = "dog-type";
+                else if (predictedClass === "고양이") typeClass = "cat-type";
+                
+                resultDisplay.innerHTML = `당신은 <span class="${typeClass}">${predictedClass}상</span>입니다! <br><small style="font-size: 0.8rem; font-weight: normal; opacity: 0.7;">(정확도: ${Math.round(highestProbability * 100)}%)</small>`;
             } else {
-                resultDisplay.innerHTML = "얼굴을 찾을 수 없습니다.";
+                resultDisplay.innerHTML = "분석 결과가 불확실합니다. 다른 사진으로 시도해보세요.";
             }
         }
     </script>

@@ -1,23 +1,24 @@
 import { recommendLottoNumbers } from './LottoRecommender';
 import { KOREAN_CITIES, WORLD_CITIES, formatCityName } from './orrery/cities';
+import { initTheme } from './theme';
 
 console.log('Fortune script loading...');
 
 const allCities = [...KOREAN_CITIES, ...WORLD_CITIES];
 
 const fortuneBtn = document.getElementById('fortune-btn') as HTMLButtonElement;
-const themeToggleBtn = document.getElementById('theme-toggle-btn') as HTMLButtonElement;
 const resultDiv = document.getElementById('result') as HTMLDivElement;
 const loadingSpinner = document.getElementById('loading-spinner') as HTMLDivElement;
 const fortuneResultArea = document.getElementById('fortune-result-area') as HTMLDivElement;
 const fortuneText = document.getElementById('fortune-text') as HTMLDivElement;
-const body = document.body;
 
 // Form inputs
 const birthDateInput = document.getElementById('birth-date') as HTMLInputElement;
 const birthTimeInput = document.getElementById('birth-time') as HTMLInputElement;
 const genderSelect = document.getElementById('gender') as HTMLSelectElement;
 const citySelect = document.getElementById('city-select') as HTMLSelectElement;
+
+initTheme();
 
 // Populate City Select
 function populateCities() {
@@ -102,19 +103,6 @@ async function handleFortuneDraw() {
     }
 }
 
-function toggleTheme() {
-    body.classList.toggle('dark');
-    const isDarkMode = body.classList.contains('dark');
-    if (themeToggleBtn) {
-        themeToggleBtn.textContent = isDarkMode ? '🌓' : '☀️';
-    }
-}
-
 if (fortuneBtn) fortuneBtn.onclick = handleFortuneDraw;
-if (themeToggleBtn) {
-    themeToggleBtn.onclick = toggleTheme;
-    const isDarkMode = body.classList.contains('dark');
-    themeToggleBtn.textContent = isDarkMode ? '🌓' : '☀️';
-}
 
 console.log('Fortune script initialized');
