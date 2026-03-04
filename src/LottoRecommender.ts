@@ -8,14 +8,14 @@ export interface LottoRecommendation {
     basis: string;
 }
 
-export async function recommendLottoNumbers(input: BirthInput): Promise<LottoRecommendation> {
+export function recommendLottoNumbers(input: BirthInput): LottoRecommendation {
     // Provide default values for time to prevent errors in Orrery engine
     const hour = input.hour ?? 12;
     const minute = input.minute ?? 0;
     const birthInputWithTime: BirthInput = { ...input, hour, minute };
 
     const saju = calculateSaju(birthInputWithTime);
-    const natal = await calculateNatal(birthInputWithTime);
+    const natal = calculateNatal(birthInputWithTime);
     
     // createChart(year, month, day, hour, minute, isMale)
     const ziwei = createChart(

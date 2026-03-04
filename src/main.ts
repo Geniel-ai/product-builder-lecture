@@ -1,29 +1,32 @@
 import { initTheme } from './theme';
 
-console.log('Main script loading...');
-
-const drawBtn = document.getElementById('draw-btn') as HTMLButtonElement;
-const premiumBtn = document.getElementById('premium-btn') as HTMLButtonElement;
-const resultDiv = document.getElementById('result') as HTMLDivElement;
-const loadingSpinner = document.getElementById('loading-spinner') as HTMLDivElement;
-const luckyMessage = document.getElementById('lucky-message') as HTMLDivElement;
+const drawBtn = document.getElementById('draw-btn') as HTMLButtonElement | null;
+const premiumBtn = document.getElementById('premium-btn') as HTMLButtonElement | null;
+const resultDiv = document.getElementById('result') as HTMLDivElement | null;
+const loadingSpinner = document.getElementById('loading-spinner') as HTMLDivElement | null;
+const luckyMessage = document.getElementById('lucky-message') as HTMLDivElement | null;
 
 initTheme();
 
+const luckyMessages = [
+    '오늘의 행운 번호입니다!',
+    '이 번호가 대박의 시작입니다!',
+    '행운이 당신을 찾아옵니다!',
+    '오늘은 좋은 기운이 느껴집니다!',
+    '이 번호로 꿈을 이루세요!',
+];
+
 function getLottoNumbers(isPremium: boolean = false) {
     const numbers: number[] = [];
-    
+
     if (isPremium) {
-        // Simulate Hot/Cold analysis
-        // Hot numbers (more likely in simulation)
         const hotPool = [1, 5, 12, 18, 24, 33, 41, 45];
-        // Cold numbers (less likely in simulation)
         const coldPool = [3, 9, 14, 21, 28, 37, 40];
-        
-        // Pick 2-3 from hot pool
+        const combinedPool = [...hotPool, ...coldPool];
+
         const hotCount = Math.floor(Math.random() * 2) + 2;
         while (numbers.length < hotCount) {
-            const r = hotPool[Math.floor(Math.random() * hotPool.length)];
+            const r = combinedPool[Math.floor(Math.random() * combinedPool.length)];
             if (!numbers.includes(r)) numbers.push(r);
         }
     }
@@ -47,26 +50,28 @@ function displayNumbers(numbers: number[], message: string = '오늘의 행운 �
     if (!resultDiv || !luckyMessage) return;
     resultDiv.innerHTML = '';
     luckyMessage.textContent = message;
-    
+
     numbers.forEach((num, index) => {
         setTimeout(() => {
             const ball = document.createElement('div');
             ball.className = 'ball';
             ball.textContent = num.toString();
             ball.style.backgroundColor = getBallColorClass(num);
+            ball.setAttribute('aria-label', `번호 ${num}`);
             resultDiv.appendChild(ball);
         }, index * 100);
     });
 }
 
 function handleDraw() {
+    const randomMsg = luckyMessages[Math.floor(Math.random() * luckyMessages.length)];
     const nums = getLottoNumbers();
-    displayNumbers(nums);
+    displayNumbers(nums, randomMsg);
 }
 
 function handlePremiumDraw() {
     if (!drawBtn || !premiumBtn || !resultDiv || !luckyMessage || !loadingSpinner) return;
-    
+
     drawBtn.disabled = true;
     premiumBtn.disabled = true;
     resultDiv.innerHTML = '';
@@ -84,5 +89,3 @@ function handlePremiumDraw() {
 
 if (drawBtn) drawBtn.onclick = handleDraw;
 if (premiumBtn) premiumBtn.onclick = handlePremiumDraw;
-
-console.log('Main script initialized');

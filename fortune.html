@@ -3,21 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>호재 로또 - 🔮 운세 기반 맞춤 번호</title>
+    <title>운세 기반 맞춤 번호 - 호재 로또 | 사주 점성술 AI 분석</title>
+    <meta name="description" content="사주팔자, 자미두수, 서양 점성술을 통합 분석하여 당신만의 맞춤 로또 번호를 제공합니다. 생년월일을 입력하고 운세 기반 행운 번호를 받아보세요.">
+    <meta name="keywords" content="운세 로또, 사주 로또, 점성술 번호, 맞춤 로또, 생년월일 로또, 자미두수">
+    <meta property="og:title" content="운세 기반 맞춤 번호 - 호재 로또">
+    <meta property="og:description" content="사주·점성술 데이터를 AI가 분석하여 당신만의 행운 번호를 추천합니다.">
+    <meta property="og:type" content="website">
+    <meta name="robots" content="index, follow">
     <link rel="stylesheet" href="style.css">
-    <style>
-        .fortune-container {
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: left;
-        }
-        .highlight-link {
-            color: #f093fb !important;
-            border: 1px solid #f093fb;
-            padding: 5px 10px;
-            border-radius: 20px;
-        }
-    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1890862001254414"
+     crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-1890862001254414">
 </head>
 <body class="dark">
     <div class="container">
@@ -29,16 +25,28 @@
                 </a>
             </div>
             <p>하늘의 기운이 담긴 당신만의 필승 번호</p>
-            <nav class="top-right-nav">
+            <nav class="top-right-nav" aria-label="주요 메뉴">
                 <a href="index.html">← 홈으로</a>
-                <button class="btn-toggle-theme" id="theme-toggle-btn">🌓</button>
+                <a href="animal-test.html">동물상 테스트</a>
+                <button class="btn-toggle-theme" id="theme-toggle-btn" aria-label="테마 전환">🌓</button>
             </nav>
         </header>
 
-        <section class="fortune-page-content fortune-container">
+        <!-- AdSense: 상단 배너 -->
+        <div class="ad-container top-ad">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-1890862001254414"
+                 data-ad-slot="auto"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <main class="fortune-page-content fortune-container" role="main">
             <h2>🔮 사주·점성술 데이터 분석</h2>
             <p class="section-desc">혼천의(Orrery) 알고리즘을 통해 사주팔자, 자미두수, 서양 점성술을 통합 분석합니다.</p>
-            
+
             <div class="fortune-form">
                 <div class="form-row">
                     <div class="form-group">
@@ -52,16 +60,15 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>성별</label>
+                        <label for="gender">성별</label>
                         <select id="gender">
                             <option value="M">남성</option>
                             <option value="F">여성</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>태어난 지역</label>
+                        <label for="city-select">태어난 지역</label>
                         <select id="city-select">
-                            <!-- JS에서 전국 도시 목록을 채움 -->
                         </select>
                     </div>
                 </div>
@@ -75,17 +82,39 @@
 
             <div id="fortune-result-area" style="display: none; margin-top: 40px; text-align: center;">
                 <h3>💎 분석된 행운의 번호</h3>
-                <div id="result" class="ball-container"></div>
-                
+                <div id="result" class="ball-container" aria-live="polite"></div>
+
                 <div id="fortune-analysis" class="analysis-result" style="display: block;">
                     <h4>📜 근거 있는 분석 보고서</h4>
                     <div id="fortune-text"></div>
                 </div>
             </div>
+        </main>
+
+        <section class="fortune-info-section">
+            <h2>📖 운세 분석이란?</h2>
+            <p>동양의 전통 명리학(사주팔자)과 서양 점성술을 결합한 독자적인 분석 시스템입니다. 생년월일시와 태어난 지역을 기반으로 천체의 위치를 정밀 계산하여, 오행의 기운과 행성의 배치를 종합적으로 분석합니다.</p>
+            <p>자미두수(紫微斗數)의 명반 길성 배치까지 고려하여 가장 조화로운 번호 조합을 도출합니다.</p>
         </section>
 
+        <!-- AdSense: 하단 배너 -->
+        <div class="ad-container bottom-ad">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-1890862001254414"
+                 data-ad-slot="auto"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
         <footer>
-            <p>© 2026 호재 로또. 사주 계산 엔진: <a href="https://rath.github.io/orrery/" target="_blank" style="color: inherit;">혼천의</a></p>
+            <p>&copy; 2026 호재 로또. 사주 계산 엔진: <a href="https://rath.github.io/orrery/" target="_blank" rel="noopener" style="color: inherit;">혼천의</a></p>
+            <nav class="footer-nav" aria-label="하단 메뉴">
+                <a href="index.html">홈</a> |
+                <a href="about.html">소개</a> |
+                <a href="privacy.html">개인정보처리방침</a>
+            </nav>
         </footer>
     </div>
 

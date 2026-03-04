@@ -197,7 +197,7 @@ function calculateAspects(planets: PlanetPosition[]): NatalAspect[] {
 // 메인 계산
 // =============================================
 
-export async function calculateNatal(input: BirthInput, houseSystem = 'P'): Promise<NatalChart> {
+export function calculateNatal(input: BirthInput, houseSystem = 'P'): NatalChart {
   const lat = input.latitude ?? DEFAULT_LAT
   const lon = input.longitude ?? DEFAULT_LON
   const unknownTime = !!input.unknownTime
@@ -257,7 +257,10 @@ export async function calculateNatal(input: BirthInput, houseSystem = 'P'): Prom
   }
 
   // SouthNode = NorthNode + 180°
-  const northNode = planets.find(p => p.id === 'NorthNode')!
+  const northNode = planets.find(p => p.id === 'NorthNode')
+  if (!northNode) {
+    throw new Error('NorthNode calculation failed')
+  }
   const southLon = normalizeDeg(northNode.longitude + 180)
   planets.push({
     id: 'SouthNode',

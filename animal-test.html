@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>동물상 테스트</title>
+    <title>동물상 테스트 - 호재 로또 | AI 얼굴 분석</title>
+    <meta name="description" content="AI가 당신의 얼굴을 분석하여 동물상을 알려드립니다. 사진을 업로드하고 나의 동물상을 확인해보세요!">
+    <meta name="keywords" content="동물상 테스트, AI 얼굴 분석, 강아지상, 고양이상, 관상 테스트">
+    <meta property="og:title" content="동물상 테스트 - 호재 로또">
+    <meta property="og:description" content="AI가 당신의 얼굴을 분석하여 동물상을 알려드립니다.">
+    <meta property="og:type" content="website">
+    <meta name="robots" content="index, follow">
     <link rel="stylesheet" href="animal-test.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1890862001254414"
      crossorigin="anonymous"></script>
@@ -12,20 +18,57 @@
 <body class="dark">
     <div class="container">
         <header>
-            <nav class="top-right-nav">
+            <nav class="top-right-nav" aria-label="주요 메뉴">
                 <a href="index.html">홈으로</a>
-                <button class="btn-toggle-theme" id="theme-toggle-btn">🌓</button>
+                <button class="btn-toggle-theme" id="theme-toggle-btn" aria-label="테마 전환">🌓</button>
             </nav>
         </header>
         <h1>나의 동물상은?</h1>
         <p id="instructions">아래 파일 선택 버튼을 눌러 얼굴 사진을 업로드해주세요.</p>
 
+        <!-- AdSense: 상단 배너 -->
+        <div class="ad-container-animal top-ad">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-1890862001254414"
+                 data-ad-slot="auto"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
         <div class="teachable-machine-container">
-            <input type="file" id="image-upload" accept="image/*" onchange="handleImageUpload(event)">
+            <input type="file" id="image-upload" accept="image/*" aria-label="얼굴 사진 업로드">
             <div id="image-container"></div>
             <div id="label-container"></div>
-            <div id="result-display">사진을 업로드하면 동물상을 분석합니다.</div>
+            <div id="result-display" aria-live="polite">사진을 업로드하면 동물상을 분석합니다.</div>
         </div>
+
+        <section class="animal-info-section">
+            <h2>동물상 테스트란?</h2>
+            <p>AI 이미지 인식 기술(Teachable Machine)을 활용하여 얼굴의 특징을 분석하고, 가장 닮은 동물상을 알려드립니다. 모든 이미지 처리는 브라우저 내에서 이루어지며, 사진이 서버로 전송되지 않습니다.</p>
+        </section>
+
+        <!-- AdSense: 하단 배너 -->
+        <div class="ad-container-animal bottom-ad">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-1890862001254414"
+                 data-ad-slot="auto"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <footer class="animal-footer">
+            <p>&copy; 2026 호재 로또. All rights reserved.</p>
+            <nav aria-label="하단 메뉴">
+                <a href="index.html">홈</a> |
+                <a href="about.html">소개</a> |
+                <a href="fortune.html">운세</a> |
+                <a href="privacy.html">개인정보처리방침</a>
+            </nav>
+        </footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
@@ -41,8 +84,14 @@
             const modelURL = URL + "model.json";
             const metadataURL = URL + "metadata.json";
 
-            model = await tmImage.load(modelURL, metadataURL);
-            maxPredictions = model.getTotalClasses();
+            try {
+                model = await tmImage.load(modelURL, metadataURL);
+                maxPredictions = model.getTotalClasses();
+            } catch (e) {
+                console.error('Model loading failed:', e);
+                const rd = document.getElementById("result-display");
+                if (rd) rd.textContent = "모델 로딩에 실패했습니다. 페이지를 새로고침해주세요.";
+            }
 
             resultDisplay = document.getElementById("result-display");
             imageContainer = document.getElementById("image-container");
@@ -50,44 +99,56 @@
         }
         init();
 
-        async function handleImageUpload(event) {
-            const image = event.target.files[0];
-            if (image) {
-                const reader = new FileReader();
-                reader.onload = async (e) => {
-                    const img = new Image();
-                    img.src = e.target.result;
-                    img.onload = async () => {
-                        imageContainer.innerHTML = '';
-                        imageContainer.appendChild(img);
-                        await predict(img);
-                    }
-                };
-                reader.readAsDataURL(image);
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            if (!model) {
+                alert('모델이 아직 로딩 중입니다. 잠시 후 다시 시도해주세요.');
+                return;
             }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.src = e.target.result;
+                img.onload = function() {
+                    imageContainer.innerHTML = '';
+                    imageContainer.appendChild(img);
+                    predict(img);
+                };
+            };
+            reader.readAsDataURL(file);
         }
 
+        // Attach event listener
+        document.getElementById("image-upload").addEventListener("change", handleImageUpload);
+
         async function predict(imageElement) {
+            if (!model) return;
             resultDisplay.textContent = "분석 중...";
-            const prediction = await model.predict(imageElement);
-            let highestProbability = 0;
-            let predictedClass = "";
+            try {
+                const prediction = await model.predict(imageElement);
+                let highestProbability = 0;
+                let predictedClass = "";
 
-            for (let i = 0; i < maxPredictions; i++) {
-                if (prediction[i].probability > highestProbability) {
-                    highestProbability = prediction[i].probability;
-                    predictedClass = prediction[i].className;
+                for (let i = 0; i < maxPredictions; i++) {
+                    if (prediction[i].probability > highestProbability) {
+                        highestProbability = prediction[i].probability;
+                        predictedClass = prediction[i].className;
+                    }
                 }
-            }
 
-            if (highestProbability > 0.5) {
-                let typeClass = "";
-                if (predictedClass === "강아지") typeClass = "dog-type";
-                else if (predictedClass === "고양이") typeClass = "cat-type";
-                
-                resultDisplay.innerHTML = `당신은 <span class="${typeClass}">${predictedClass}상</span>입니다! <br><small style="font-size: 0.8rem; font-weight: normal; opacity: 0.7;">(정확도: ${Math.round(highestProbability * 100)}%)</small>`;
-            } else {
-                resultDisplay.innerHTML = "분석 결과가 불확실합니다. 다른 사진으로 시도해보세요.";
+                if (highestProbability > 0.5) {
+                    let typeClass = "";
+                    if (predictedClass === "강아지") typeClass = "dog-type";
+                    else if (predictedClass === "고양이") typeClass = "cat-type";
+
+                    resultDisplay.innerHTML = '당신은 <span class="' + typeClass + '">' + predictedClass + '상</span>입니다! <br><small style="font-size: 0.8rem; font-weight: normal; opacity: 0.7;">(정확도: ' + Math.round(highestProbability * 100) + '%)</small>';
+                } else {
+                    resultDisplay.innerHTML = "분석 결과가 불확실합니다. 다른 사진으로 시도해보세요.";
+                }
+            } catch (e) {
+                console.error('Prediction failed:', e);
+                resultDisplay.textContent = "분석 중 오류가 발생했습니다. 다시 시도해주세요.";
             }
         }
     </script>
